@@ -1,0 +1,6 @@
+data
+build
+dist
+node_modules
+.env
+43114_txs.csv

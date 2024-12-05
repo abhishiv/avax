@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model transactions {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  timestamp    String
+  status       Boolean
+  block_number Decimal @db.Decimal
+  tx_index     Decimal @db.Decimal
+  from         String?
+  to           String?
+  value        Decimal @db.Decimal
+  gas_limit    Decimal @db.Decimal
+  gas_used     Decimal @db.Decimal
+  gas_price    Decimal? @db.Decimal
+
+  @@index([from, to], map: "idx_from_to")
+  @@index([from], map: "idx_transactions_from")
+  @@index([to], map: "idx_transactions_to")
+  @@index([value], map: "idx_transactions_value")
+}
+
+model SyncStatus {
+ id            Int       @id @default(autoincrement())
+  blockNumber    Decimal @db.Decimal
+  processingStartedAt DateTime   @default(now())
+  processingFailedAt DateTime?
+  processedAt  DateTime?
+}

@@ -1,0 +1,49 @@
+{
+  "name": "routescan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx vitest",
+    "start": "node dist/src/index.js",
+    "start-dev": "npx vite-node ./src/index.ts",
+    "seed": "npx prisma db push && npx vite-node ./scripts/seed.ts",
+    "setup-benchmark": "npx run seed && npx vite-node ./benchmark/scripts/setup.ts",
+    "benchmark": "npx vitest bench",
+    "build": "npx tsc",
+    "typecheck": "npx tsc --noEmit",
+    "realtime-producer": "node ./dist/src/realtime/producer.js",
+    "realtime-consumer": "node ./dist/src/realtime/consumer.js",
+    "realtime-producer-dev": "npx vite-node ./src/realtime/producer.ts",
+    "realtime-consumer-dev": "npx vite-node ./src/realtime/consumer.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dsnp/parquetjs": "^1.8.5",
+    "@hono/node-server": "^1.13.7",
+    "@hono/swagger-ui": "^0.5.0",
+    "@hono/zod-openapi": "^0.18.3",
+    "@prisma/client": "^6.0.1",
+    "apache-arrow": "^18.1.0",
+    "async": "^3.2.6",
+    "bee-queue": "^1.7.1",
+    "better-sqlite3": "^11.6.0",
+    "duckdb": "^1.1.3",
+    "ethers": "^6.13.4",
+    "hono": "^4.6.12",
+    "papaparse": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/async": "^3.2.24",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/papaparse": "^5.3.15",
+    "@types/pg": "^8.11.10",
+    "prisma": "^6.0.1",
+    "typescript": "^5.7.2",
+    "vite-node": "^2.1.6",
+    "vitest": "^2.1.6"
+  }
+}
